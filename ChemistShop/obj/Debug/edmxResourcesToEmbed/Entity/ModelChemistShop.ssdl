@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChemistShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Manufacturers">
+    <Key>
+      <PropertyRef Name="MedicineManufacturerId" />
+    </Key>
+    <Property Name="MedicineManufacturerId" Type="int" Nullable="false" />
+    <Property Name="ManufacturerCountryId" Type="int" Nullable="false" />
+    <Property Name="ManufacturerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ManufacturersCountries">
+    <Key>
+      <PropertyRef Name="ManufacturerCountryId" />
+    </Key>
+    <Property Name="ManufacturerCountryId" Type="int" Nullable="false" />
+    <Property Name="ManufacturerCountryName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicines">
+    <Key>
+      <PropertyRef Name="MedicineId" />
+    </Key>
+    <Property Name="MedicineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MedicineManufacturerId" Type="int" Nullable="false" />
+    <Property Name="MedicineName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MedicineCost" Type="int" Nullable="false" />
+    <Property Name="MedicineDiscount" Type="int" Nullable="false" />
+    <Property Name="MedicineRank" Type="float" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="MedicineDateManufacturing" Type="date" Nullable="false" />
+    <Property Name="MedicineExpirationDate" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Manufacturers_ManufacturersCountries">
+    <End Role="ManufacturersCountries" Type="Self.ManufacturersCountries" Multiplicity="1" />
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManufacturersCountries">
+        <PropertyRef Name="ManufacturerCountryId" />
+      </Principal>
+      <Dependent Role="Manufacturers">
+        <PropertyRef Name="ManufacturerCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medicines_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Medicines">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medicines_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+    <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="MedicineManufacturerId" />
+      </Principal>
+      <Dependent Role="Medicines">
+        <PropertyRef Name="MedicineManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChemistShopModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ManufacturersCountries" EntityType="Self.ManufacturersCountries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medicines" EntityType="Self.Medicines" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Manufacturers_ManufacturersCountries" Association="Self.FK_Manufacturers_ManufacturersCountries">
+      <End Role="ManufacturersCountries" EntitySet="ManufacturersCountries" />
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medicines_Category" Association="Self.FK_Medicines_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Medicines" EntitySet="Medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medicines_Manufacturers" Association="Self.FK_Medicines_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Medicines" EntitySet="Medicines" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

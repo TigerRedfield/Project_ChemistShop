@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChemistShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicines_Category" FromRole="Category" ToRole="Medicines" />
+  </EntityType>
+  <EntityType Name="Manufacturers">
+    <Key>
+      <PropertyRef Name="MedicineManufacturerId" />
+    </Key>
+    <Property Name="MedicineManufacturerId" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerCountryId" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ManufacturersCountries" Relationship="Self.FK_Manufacturers_ManufacturersCountries" FromRole="Manufacturers" ToRole="ManufacturersCountries" />
+    <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicines_Manufacturers" FromRole="Manufacturers" ToRole="Medicines" />
+  </EntityType>
+  <EntityType Name="ManufacturersCountries">
+    <Key>
+      <PropertyRef Name="ManufacturerCountryId" />
+    </Key>
+    <Property Name="ManufacturerCountryId" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerCountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Manufacturers" Relationship="Self.FK_Manufacturers_ManufacturersCountries" FromRole="ManufacturersCountries" ToRole="Manufacturers" />
+  </EntityType>
+  <EntityType Name="Medicines">
+    <Key>
+      <PropertyRef Name="MedicineId" />
+    </Key>
+    <Property Name="MedicineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MedicineManufacturerId" Type="Int32" Nullable="false" />
+    <Property Name="MedicineName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MedicineCost" Type="Int32" Nullable="false" />
+    <Property Name="MedicineDiscount" Type="Int32" Nullable="false" />
+    <Property Name="MedicineRank" Type="Double" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="MedicineDateManufacturing" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MedicineExpirationDate" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Medicines_Category" FromRole="Medicines" ToRole="Category" />
+    <NavigationProperty Name="Manufacturers" Relationship="Self.FK_Medicines_Manufacturers" FromRole="Medicines" ToRole="Manufacturers" />
+  </EntityType>
+  <Association Name="FK_Medicines_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Medicines">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manufacturers_ManufacturersCountries">
+    <End Role="ManufacturersCountries" Type="Self.ManufacturersCountries" Multiplicity="1" />
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManufacturersCountries">
+        <PropertyRef Name="ManufacturerCountryId" />
+      </Principal>
+      <Dependent Role="Manufacturers">
+        <PropertyRef Name="ManufacturerCountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medicines_Manufacturers">
+    <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="1" />
+    <End Role="Medicines" Type="Self.Medicines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturers">
+        <PropertyRef Name="MedicineManufacturerId" />
+      </Principal>
+      <Dependent Role="Medicines">
+        <PropertyRef Name="MedicineManufacturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBChemistShop" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" />
+    <EntitySet Name="ManufacturersCountries" EntityType="Self.ManufacturersCountries" />
+    <EntitySet Name="Medicines" EntityType="Self.Medicines" />
+    <AssociationSet Name="FK_Medicines_Category" Association="Self.FK_Medicines_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Medicines" EntitySet="Medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manufacturers_ManufacturersCountries" Association="Self.FK_Manufacturers_ManufacturersCountries">
+      <End Role="ManufacturersCountries" EntitySet="ManufacturersCountries" />
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medicines_Manufacturers" Association="Self.FK_Medicines_Manufacturers">
+      <End Role="Manufacturers" EntitySet="Manufacturers" />
+      <End Role="Medicines" EntitySet="Medicines" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChemistShopModelStoreContainer" CdmEntityContainer="DBChemistShop">
+    <EntitySetMapping Name="Category">
+      <EntityTypeMapping TypeName="ChemistShopModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturers">
+      <EntityTypeMapping TypeName="ChemistShopModel.Manufacturers">
+        <MappingFragment StoreEntitySet="Manufacturers">
+          <ScalarProperty Name="MedicineManufacturerId" ColumnName="MedicineManufacturerId" />
+          <ScalarProperty Name="ManufacturerCountryId" ColumnName="ManufacturerCountryId" />
+          <ScalarProperty Name="ManufacturerName" ColumnName="ManufacturerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManufacturersCountries">
+      <EntityTypeMapping TypeName="ChemistShopModel.ManufacturersCountries">
+        <MappingFragment StoreEntitySet="ManufacturersCountries">
+          <ScalarProperty Name="ManufacturerCountryId" ColumnName="ManufacturerCountryId" />
+          <ScalarProperty Name="ManufacturerCountryName" ColumnName="ManufacturerCountryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicines">
+      <EntityTypeMapping TypeName="ChemistShopModel.Medicines">
+        <MappingFragment StoreEntitySet="Medicines">
+          <ScalarProperty Name="MedicineId" ColumnName="MedicineId" />
+          <ScalarProperty Name="MedicineManufacturerId" ColumnName="MedicineManufacturerId" />
+          <ScalarProperty Name="MedicineName" ColumnName="MedicineName" />
+          <ScalarProperty Name="MedicineCost" ColumnName="MedicineCost" />
+          <ScalarProperty Name="MedicineDiscount" ColumnName="MedicineDiscount" />
+          <ScalarProperty Name="MedicineRank" ColumnName="MedicineRank" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="MedicineDateManufacturing" ColumnName="MedicineDateManufacturing" />
+          <ScalarProperty Name="MedicineExpirationDate" ColumnName="MedicineExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,79 @@
+﻿    <!--Работа с окном-->
+    <Window x:Class="ChemistShop.View.AuthorizationDatabaseCataloge"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChemistShop.View"
+        mc:Ignorable="d"
+        Title="Всё для вашего здоровья" Height="450" Width="800">
+    
+    <!--Общая схема-->
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--Заголовок окна-->
+        <Grid Grid.Row="0" Background="CornflowerBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Работа с заголовком окна-->
+            <Image Grid.Column="0" Source="Resources/Logo.png"/>
+            <TextBlock Grid.Column="1" Text="Авторизация сотрудника"
+                       Style="{StaticResource TitleFormat}"/>
+            <Button x:Name="ButExit" Grid.Column="2" 
+                   Margin="6" Click="ButExit_Click" Content="Главное меню" Style="{StaticResource TextFormatExit}"/>
+        </Grid>
+
+        <!--Центральная часть-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Объекты центральной части-->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Введите логин:" Style="{StaticResource TextFormatApplication}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Введите пароль:" Style="{StaticResource TextFormatApplication}"/>
+            <TextBox x:Name="TextLoginAdmin" Grid.Row="1" Grid.Column="1" Margin="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="Monotype Corsiva"/>
+            <PasswordBox x:Name="TextPasswordAdmin" PasswordChar="." Grid.Row="2" Grid.Column="1" Margin="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="30" FontFamily="Monotype Corsiva"/>
+            <Button x:Name="ButtonAuthoAdmin" Margin="120, 5" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="White" Click="ButtonAuthoAdmin_Click">
+                
+                <!--Вставка изображения на кнопку-->
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resources/Admin.png" Stretch="Uniform"/>
+                    <TextBlock Text="Войти" Style="{StaticResource TextFormatApplication}" Margin="10, 0, 10, 0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!--Нижняя часть окна-->
+        <Grid Grid.Row="2" Background="CornflowerBlue">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Подписи-->
+            <TextBlock Grid.Column="0" Text="Васильев Д.С."
+                       Style="{StaticResource TextFormatPageFooter}"/>
+            <TextBlock Grid.Column="1" Text="tigerredfield@gmail.com"
+                       Style="{StaticResource TextFormatPageFooter}"/>
+        </Grid>
+    </Grid>
+</Window>
